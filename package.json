@@ -1,0 +1,30 @@
+{
+  "name": "css-sentinel",
+  "version": "0.0.1",
+  "description": "Always have an answer for the question \"is my CSS bad?\"",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha --require should --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/conceptualitis/css-sentinel.git"
+  },
+  "keywords": [
+    "css"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/conceptualitis/css-sentinel/issues"
+  },
+  "homepage": "https://github.com/conceptualitis/css-sentinel#readme",
+  "devDependencies": {
+    "mocha": "^2.2.5",
+    "should": "^6.0.3"
+  },
+  "dependencies": {
+    "colorguard": "^0.3.0",
+    "parker": "0.0.8"
+  }
+}
