@@ -18,10 +18,17 @@ describe('report', function () {
         fs.unlinkSync('./test/test-output.json');
     })
 
-    it('should generate reports from three tools', function () {
-        report.tools.should.be.an.Object;
-        report.tools.colorguard.should.be.an.Object;
-        report.tools.parker.should.be.an.Object;
+    it('should contain a last run date', function () {
+        report.lastRun.should.be.a.Number;
+    });
+
+    it('should generate reports from two tools', function () {
+        var key = new Date(report.lastRun).setHours(0, 0, 0, 0);
+
+        report.history.should.be.an.Object;
+
+        report.history[key].colorguard.should.be.an.Object;
+        report.history[key].parker.should.be.an.Object;
     });
 
     it('should generate an array of files inspected', function () {
