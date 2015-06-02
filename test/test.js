@@ -12,10 +12,17 @@ describe('report', function () {
             format: 'json',
             output: './test/test-output.json'
         });
+
+        mdReport = sentinel.report(filename, {
+            name: 'Test Report',
+            format: 'md',
+            output: './test/test-output.md'
+        });
     });
 
     after(function () {
         fs.unlinkSync('./test/test-output.json');
+        fs.unlinkSync('./test/test-output.md');
     })
 
     it('should contain a last run date', function () {
@@ -43,5 +50,9 @@ describe('report', function () {
 
     it('should generate an output file if asked to', function () {
         fs.existsSync('./test/test-output.json').should.be.true;
+    });
+
+    it('should generate a markdown file if asked to', function () {
+        fs.existsSync('./test/test-output.md').should.be.true;
     });
 });

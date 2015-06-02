@@ -24,8 +24,13 @@ var sentinel = {
 
         report.files.push(filename);
 
-        if (options.output && options.format == 'json') {
-            fs.writeFileSync(path.join(__dirname, options.output), JSON.stringify(report));
+        if (options.output) {
+            if (options.format == 'json') {
+                fs.writeFileSync(path.join(__dirname, options.output), JSON.stringify(report));
+            }
+            if (options.format == 'md') {
+                fs.writeFileSync(path.join(__dirname, options.output), '#' + report.name + '\n');   
+            }
         }
 
         return report;
