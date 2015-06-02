@@ -1,7 +1,7 @@
 var sentinel = require('..');
 var fs = require('fs');
 
-var filename = 'test/fixtures/simple.css';
+var filename = '../test/fixtures/simple.css';
 
 describe('report', function () {
     var report = null;
@@ -10,13 +10,13 @@ describe('report', function () {
         report = sentinel.report(filename, {
             name: 'Test Report',
             format: 'json',
-            output: './test/test-output.json'
+            output: '../test/test-output.json'
         });
 
         mdReport = sentinel.report(filename, {
             name: 'Test Report',
             format: 'md',
-            output: './test/test-output.md'
+            output: '../test/test-output.md'
         });
     });
 
