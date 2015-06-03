@@ -3,7 +3,7 @@ var fs = require('fs');
 
 var filename = '../test/fixtures/simple.css';
 
-describe('report', function () {
+describe('new report', function () {
     var report = null;
 
     before(function () {

@@ -1,0 +1,20 @@
+#!/usr/bin/env node
+var fs = require('fs');
+var yargs = require('yargs');
+var path = require('path');
+var util = require('util');
+
+var sentinel = require('..');
+var argv = yargs.argv;
+
+yargs.usage('Usage: sentinel [style.css]');
+
+process.title = 'sentinel';
+
+if (argv._[0]) {
+    var location = argv._[0];
+    var output = sentinel.report(location, {});
+    console.log(util.inspect(output, false, null));
+} else {
+    yargs.showHelp();
+}
