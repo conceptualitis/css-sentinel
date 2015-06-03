@@ -35,7 +35,10 @@ describe('new report', function () {
         report.history.should.be.an.Object;
 
         report.history[key].colorguard.should.be.an.Object;
+        report.history[key].colorguard.should.not.be.empty;
+
         report.history[key].parker.should.be.an.Object;
+        report.history[key].parker.should.not.be.empty;
     });
 
     it('should generate an array of files inspected', function () {
