@@ -1,19 +1,21 @@
 var sentinel = require('..');
 var fs = require('fs');
 
-var filename = '../test/fixtures/simple.css';
+var filename = './test/fixtures/simple.css';
 
 describe('new report', function () {
     var report = null;
 
     before(function () {
-        report = sentinel.report(filename, {
+        var css = fs.readFileSync(filename, 'utf8');
+
+        report = sentinel.report(css, {
             name: 'Test Report',
             format: 'json',
             output: '../test/test-output.json'
         });
 
-        mdReport = sentinel.report(filename, {
+        mdReport = sentinel.report(css, {
             name: 'Test Report',
             format: 'md',
             output: '../test/test-output.md'
@@ -39,11 +41,6 @@ describe('new report', function () {
 
         report.history[key].parker.should.be.an.Object;
         report.history[key].parker.should.not.be.empty;
-    });
-
-    it('should generate an array of files inspected', function () {
-        report.files.should.be.an.Array;
-        report.files.should.containEql(filename);
     });
 
     it('should allow customization of the report name', function () {

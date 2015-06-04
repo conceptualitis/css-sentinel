@@ -16,11 +16,15 @@ yargs
 process.title = 'sentinel';
 
 if (argv._[0] && argv.output) {
-    var css = argv._[0];
+    var cssPath = path.join(__dirname, argv._[0]);
+    var css = fs.readFileSync(cssPath, 'utf8');
     var report = sentinel.report(css, {});
+
+    report.files = [].push(fs.basename(cssPath));
+    
     mkdirp(path.join(__dirname, argv.output));
     fs.writeFileSync(path.join(__dirname, argv.output, '.sentinel-report.json'), JSON.stringify(report));
-    stdout.write('Done\n');
+    stdout.write('Done!\n');
 } else {
     yargs.showHelp();
 }
