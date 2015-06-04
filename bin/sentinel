@@ -3,18 +3,24 @@ var fs = require('fs');
 var yargs = require('yargs');
 var path = require('path');
 var util = require('util');
+var mkdirp = require('mkdirp');
+var stdout = process.stdout;
 
 var sentinel = require('..');
 var argv = yargs.argv;
 
-yargs.usage('Usage: sentinel [style.css]');
+yargs
+    .describe('output', 'Directory where the reports will be saved [required]')
+    .usage('Usage: sentinel [style.css]');
 
 process.title = 'sentinel';
 
-if (argv._[0]) {
-    var location = argv._[0];
-    var output = sentinel.report(location, {});
-    console.log(util.inspect(output, false, null));
+if (argv._[0] && argv.output) {
+    var css = argv._[0];
+    var report = sentinel.report(css, {});
+    mkdirp(path.join(__dirname, argv.output));
+    fs.writeFileSync(path.join(__dirname, argv.output, '.sentinel-report.json'), JSON.stringify(report));
+    stdout.write('Done\n');
 } else {
     yargs.showHelp();
 }
