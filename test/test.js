@@ -12,12 +12,14 @@ describe('new report', function () {
         report = sentinel.report(css, {
             name: 'Test Report',
             format: 'json',
+            history: JSON.parse(fs.readFileSync('./test/fixtures/.sentinel-report.json', 'utf8')),
             output: '../test/test-output.json'
         });
 
         mdReport = sentinel.report(css, {
             name: 'Test Report',
             format: 'md',
+            history: JSON.parse(fs.readFileSync('./test/fixtures/.sentinel-report.json', 'utf8')),
             output: '../test/test-output.md'
         });
     });
@@ -36,13 +38,14 @@ describe('new report', function () {
     });
 
     it('should generate historical reports from two tools', function () {
-        var key = new Date(report.lastRun).setHours(0, 0, 0, 0);
-
         report.history.should.be.an.Object;
+        report.history[0].colorguard.should.be.an.Object.and.not.be.empty;
+        report.history[0].parker.should.be.an.Object.and.not.be.empty;
+    });
 
-        report.history[key].colorguard.should.be.an.Object.and.not.be.empty;
-
-        report.history[key].parker.should.be.an.Object.and.not.be.empty;
+    it('should preserve historical reports', function () {
+        report.history[1].colorguard.should.be.an.Object.and.not.be.empty;
+        report.history[1].parker.should.be.an.Object.and.not.be.empty;
     });
 
     it('should allow customization of the report name', function () {
