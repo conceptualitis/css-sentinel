@@ -31,20 +31,21 @@ describe('new report', function () {
         report.lastRun.should.be.a.Number;
     });
 
-    it('should generate reports from two tools', function () {
+    it('should generate a summary report', function () {
+        report.summary.should.be.an.Object.and.not.empty;
+    });
+
+    it('should generate historical reports from two tools', function () {
         var key = new Date(report.lastRun).setHours(0, 0, 0, 0);
 
         report.history.should.be.an.Object;
 
-        report.history[key].colorguard.should.be.an.Object;
-        report.history[key].colorguard.should.not.be.empty;
+        report.history[key].colorguard.should.be.an.Object.and.not.be.empty;
 
-        report.history[key].parker.should.be.an.Object;
-        report.history[key].parker.should.not.be.empty;
+        report.history[key].parker.should.be.an.Object.and.not.be.empty;
     });
 
     it('should allow customization of the report name', function () {
-        report.name.should.be.a.String;
         report.name.should.equal('Test Report');
     });
 
